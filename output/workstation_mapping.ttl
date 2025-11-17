@@ -1,0 +1,128 @@
+@prefix rml: <http://www.w3.org/ns/rml#> .
+@prefix ql: <http://www.w3.org/ns/rml/ql#> .
+@prefix ex: <http://example.org/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <https://schema.org/> .
+@prefix qudt: <http://qudt.org/vocab/unit/> .
+@prefix qudt-quantity: <http://qudt.org/vocab/quantity#> .
+
+<#SensorTriplesMap> a rml:TriplesMap;
+    rml:logicalSource [
+        rml:source "workstation.csv";
+        rml:referenceFormulation ql:CSV;
+        rml:iterator "<http://example.org/workstation/{workstation_id}>"
+    ];
+    rml:subjectMap [
+        rml:template "http://example.org/sensor/{workstation_id}";
+        rml:class sosa:Sensor
+    ];
+    rml:predicateObjectMap [
+        rml:predicate schema:name;
+        rml:objectMap [
+            rml:reference "name";
+            rml:datatype xsd:string
+        ]
+    ];
+    rml:predicateObjectMap [
+        rml:predicate ex:floor;
+        rml:objectMap [
+            rml:reference "floor";
+            rml:datatype xsd:integer
+        ]
+    ];
+    rml:predicateObjectMap [
+        rml:predicate geo:lat;
+        rml:objectMap [
+            rml:reference "latitude";
+            rml:datatype xsd:float
+        ]
+    ];
+    rml:predicateObjectMap [
+        rml:predicate geo:long;
+        rml:objectMap [
+            rml:reference "longitude";
+            rml:datatype xsd:float
+        ]
+    ];
+    rml:predicateObjectMap [
+        rml:predicate dct:description;
+        rml:objectMap [
+            rml:reference "description";
+            rml:datatype xsd:string
+        ]
+    ].
+
+<#TemperatureObservationTriplesMap> a rml:TriplesMap;
+    rml:logicalSource [
+        rml:source "workstation.csv";
+        rml:referenceFormulation ql:CSV;
+        rml:iterator "<http://example.org/obs/temp-{workstation_id}>"
+    ];
+    rml:subjectMap [
+        rml:template "http://example.org/obs/temp-{workstation_id}";
+        rml:class sosa:Observation
+    ];
+    rml:predicateObjectMap [
+        rml:predicate sosa:hasSimpleResult;
+        rml:objectMap [
+            rml:reference "temperature";
+            rml:datatype xsd:float
+        ]
+    ];
+    rml:predicateObjectMap [
+        rml:predicate sosa:observedProperty;
+        rml:objectMap [
+            rml:constant <http://qudt.org/vocab/quantitykind/Temperature>
+        ]
+    ];
+    rml:predicateObjectMap [
+        rml:predicate qudt:unit;
+        rml:objectMap [
+            rml:constant <http://qudt.org/vocab/unit/DEG_C>
+        ]
+    ];
+    rml:predicateObjectMap [
+        rml:predicate sosa:madeBySensor;
+        rml:objectMap [
+            rml:template "http://example.org/sensor/{workstation_id}"
+        ]
+    ].
+
+<#HumidityObservationTriplesMap> a rml:TriplesMap;
+    rml:logicalSource [
+        rml:source "workstation.csv";
+        rml:referenceFormulation ql:CSV;
+        rml:iterator "<http://example.org/obs/hum-{workstation_id}>"
+    ];
+    rml:subjectMap [
+        rml:template "http://example.org/obs/hum-{workstation_id}";
+        rml:class sosa:Observation
+    ];
+    rml:predicateObjectMap [
+        rml:predicate sosa:hasSimpleResult;
+        rml:objectMap [
+            rml:reference "humidity";
+            rml:datatype xsd:float
+        ]
+    ];
+    rml:predicateObjectMap [
+        rml:predicate sosa:observedProperty;
+        rml:objectMap [
+            rml:constant <http://qudt.org/vocab/quantitykind/DimensionlessRatio>
+        ]
+    ];
+    rml:predicateObjectMap [
+        rml:predicate qudt:unit;
+        rml:objectMap [
+            rml:constant <http://qudt.org/vocab/unit/PERCENT>
+        ]
+    ];
+    rml:predicateObjectMap [
+        rml:predicate sosa:madeBySensor;
+        rml:objectMap [
+            rml:template "http://example.org/sensor/{workstation_id}"
+        ]
+    ].

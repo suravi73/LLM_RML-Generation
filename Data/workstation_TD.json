@@ -1,0 +1,44 @@
+{
+  "@context": [
+    "https://www.w3.org/2022/wot/td/v1.1",
+    {
+      "saref": "http://www.w3.org/ns/saref#",
+      "schema": "https://schema.org/",
+      "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+    }
+  ],
+  "@type": "Thing",
+  "title": "Factory Workstation",
+  "description": "A physical workstation in a smart factory environment.",
+  "id": "urn:dev:wot:shopfloor:workstation-template",
+  "properties": {
+    "workstationId": {
+      "title": "Workstation ID",
+      "type": "string",
+      "description": "Unique identifier of the workstation (e.g., WS01)",
+      "readOnly": true
+    },
+    "name": {
+      "title": "Workstation Name",
+      "type": "string",
+      "description": "Human-readable name of the workstation (e.g., Assembly Station A)"
+    },
+    "floor": {
+      "title": "Floor Number",
+      "type": "integer",
+      "description": "The floor level where the workstation is located"
+    },
+    "latitude": {
+      "title": "Latitude",
+      "type": "number",
+      "description": "WGS84 latitude coordinate of the workstation",
+      "unit": "http://qudt.org/vocab/unit/DEG"
+    },
+    "longitude": {
+      "title": "Longitude",
+      "type": "number",
+      "description": "WGS84 longitude coordinate of the workstation",
+      "unit": "http://qudt.org/vocab/unit/DEG"
+    }
+  }
+}

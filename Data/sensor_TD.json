@@ -1,0 +1,51 @@
+{
+  "@context": [
+    "https://www.w3.org/2019/wot/td/v1.1",
+    { "iot": "https://example.org/iot#" }
+  ],
+  "id": "urn:dev:ops:smartSensor-001",
+  "title": "Smart Temperature and Humidity Sensor",
+  "description": "An IoT sensor that measures ambient temperature and humidity in real time.",
+  "security": ["nosec_sc"],
+  "securityDefinitions": { "nosec_sc": { "scheme": "nosec" } },
+  "properties": {
+    "temperature": {
+      "type": "number",
+      "unit": "degree celsius",
+      "description": "Current ambient temperature",
+      "readOnly": true,
+      "forms": [
+        {
+          "href": "https://example.org/things/sensor001/properties/temperature",
+          "contentType": "application/json",
+          "op": ["readproperty"]
+        }
+      ]
+    },
+    "humidity": {
+      "type": "number",
+      "unit": "percent",
+      "description": "Current relative humidity",
+      "readOnly": true,
+      "forms": [
+        {
+          "href": "https://example.org/things/sensor001/properties/humidity",
+          "contentType": "application/json",
+          "op": ["readproperty"]
+        }
+      ]
+    }
+  },
+  "events": {
+    "thresholdExceeded": {
+      "description": "Emitted when the temperature exceeds the predefined threshold.",
+      "data": { "type": "number", "unit": "degree celsius" },
+      "forms": [
+        {
+          "href": "https://example.org/things/sensor001/events/thresholdExceeded",
+          "subprotocol": "longpoll"
+        }
+      ]
+    }
+  }
+}

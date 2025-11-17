@@ -1,0 +1,4 @@
+workstation_id, name, floor, latitude, longitude
+WS01, Assembly Station A, 1, 48.856500, 2.352100
+WS02, Welding Station B, 1, 48.856600, 2.352200
+WS03, Packaging Station C, 2, 48.856700, 2.352300
